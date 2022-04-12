@@ -1,0 +1,44 @@
+{
+	"name": "test1",
+	"sprite": "skeleton",
+	"xp": 250.0,
+	"stats": {
+		"maxHealth": 500,
+		"attackSpeed": 75.0,
+		"attack": 50.0
+	},
+	"phases": [
+		{
+			"name": "test1",
+			"transitions": [
+				{
+					"name": "to_test2"
+				}
+			]
+		},
+		{
+			"name": "test2",
+			"attacks": [
+				{
+					"name": "test_attack_0",
+					"minDamage": 5,
+					"maxDamage": 10,
+					"angleChange": 10.0
+				}
+			],
+			"transitions": [
+				{
+					"name": "to_test3"
+				}
+			]
+		},
+		{
+			"name": "test3",
+			"transitions": [
+				{
+					"name": "to_test1"
+				}
+			]
+		}
+	]
+}

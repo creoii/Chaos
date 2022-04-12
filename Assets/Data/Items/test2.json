@@ -1,0 +1,17 @@
+{
+	"name": "Test 2",
+	"description": "A test item",
+	"sprite": "test_3",
+	"itemType": "Sigil",
+	"rarity": "Divine",
+	"cooldown": 2.0,
+	"attacks": [
+		{
+			"sprite": "fire_bolt",
+			"speed": 2.0,
+			"lifetime": 2.0,
+			"projectileCount": 6,
+			"angleGap": 5
+		}
+	]
+}

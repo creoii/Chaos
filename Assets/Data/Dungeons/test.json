@@ -1,0 +1,86 @@
+{
+  "name": "Test Dungeon",
+  "difficulty": "A",
+  "rooms": [
+    {
+      "name": "test_start",
+      "type": "Start",
+      "width": 12,
+      "height": 12,
+      "connections": 1,
+      "floorTile": {
+        "name": "test_provider",
+        "tiles": [
+          {
+            "name": "necropolis_ground_tile0",
+            "chance": 1.0
+          }
+        ]
+      }
+    },
+    {
+      "name": "test_standard_0",
+      "type": "Standard",
+      "width": 12,
+      "height": 12,
+      "connections": 3,
+      "floorTile": {
+        "name": "test_provider",
+        "tiles": [
+          {
+            "name": "necropolis_ground_tile0",
+            "chance": 1.0
+          }
+        ]
+      }
+    },
+    {
+      "name": "test_standard_1",
+      "type": "Standard",
+      "width": 12,
+      "height": 12,
+      "connections": 2,
+      "floorTile": {
+        "name": "test_provider",
+        "tiles": [
+          {
+            "name": "necropolis_ground_tile0",
+            "chance": 1.0
+          }
+        ]
+      }
+    },
+    {
+      "name": "test_hallway",
+      "type": "Hallway",
+      "width": 4,
+      "height": 8,
+      "connections": 2,
+      "floorTile": {
+        "name": "test_provider",
+        "tiles": [
+          {
+            "name": "necropolis_ground_tile0",
+            "chance": 1.0
+          }
+        ]
+      }
+    },
+    {
+      "name": "test_boss",
+      "type": "Boss",
+      "width": 12,
+      "height": 12,
+      "connections": 1,
+      "floorTile": {
+        "name": "test_provider",
+        "tiles": [
+          {
+            "name": "necropolis_ground_tile0",
+            "chance": 1.0
+          }
+        ]
+      }
+    }
+  ]
+}

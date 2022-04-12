@@ -1,0 +1,7 @@
+{
+	"name": "slowed",
+	"duration": 7.5,
+	"statChange": {
+		"speed": -5.0
+	}
+}

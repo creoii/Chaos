@@ -1,0 +1,36 @@
+{
+	"name": "Test 1",
+	"description": "A test item",
+	"sprite": "inquisition",
+	"itemType": "Helm",
+	"rarity": "Mythical",
+	"maxSigils": 3,
+	"manaCost": 80,
+	"cooldown": 0.5,
+	"attacks": [
+		{
+			"sprite": "fire_bolt",
+			"speed": 1.0,
+			"lifetime": 2.0,
+			"projectileCount": 18,
+			"minDamage": 1.0,
+			"maxDamage": 3.0,
+			"angleGap": 20,
+			"onMouse": true,
+			"acceleration": {
+				"rate": -0.01,
+				"min": 0.0
+			}
+		}
+	],
+	"statusEffects": [
+		{
+			"name": "instant_health",
+			"duration": 0.01,
+			"statChange": {
+				"health": 50.0,
+				"instant": true
+			}
+		}
+	]
+}

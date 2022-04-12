@@ -1,0 +1,25 @@
+{
+	"name": "test_attack_0",
+	"sprite": "void_bolt",
+	"speed": 1.0,
+	"lifetime": 3.0,
+	"projectileCount": 2,
+	"rateOfFire": 3.0,
+	"minDamage": 2.0,
+	"maxDamage": 6.0,
+	"angleGap": 15,
+	"acceleration": {
+		"rate": -0.003,
+		"multiplier": 1.5,
+		"offset": 1.0
+	},
+	"statusEffects": [
+		{
+			"name": "dazed",
+			"duration": 5.0,
+			"statChange": {
+				"attackSpeed": -8.0
+			}
+		}
+	]
+}

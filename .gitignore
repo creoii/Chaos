@@ -1,0 +1,9 @@
+.git/*
+.vs/*
+Logs/*
+obj/*
+Temp/*
+UserSettings/*
+ProjectSettings/*
+Library/*
+*.meta

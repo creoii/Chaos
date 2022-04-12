@@ -1,0 +1,8 @@
+{
+	"name": "follow",
+	"type": "Follow",
+	"speed": 0.5,
+	"target": "player",
+	"minChangeThreshold": 0.01,
+	"maxChangeThreshold": 0.5
+}

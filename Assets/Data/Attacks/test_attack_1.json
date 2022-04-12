@@ -1,0 +1,13 @@
+{
+	"name": "test_attack_1",
+	"sprite": "fire_bolt",
+	"speed": 1.0,
+	"lifetime": 4.5,
+	"projectileCount": 2,
+	"rateOfFire": 4.5,
+	"minDamage": 2.0,
+	"maxDamage": 6.0,
+	"angleGap": 10,
+	"target": "self",
+	"angleChange": 5
+}

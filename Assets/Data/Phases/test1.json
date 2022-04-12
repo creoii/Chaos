@@ -1,0 +1,21 @@
+{
+	"name": "test1",
+	"duration": 5.0,
+	"attacks": [
+		{
+			"name": "test_attack_1",
+			"minDamage": 5,
+			"maxDamage": 10
+		}
+	],
+	"movements": [
+		{
+			"name": "wander"
+		}
+	],
+	"transitions": [
+		{
+			"name": "to_test2"
+		}
+	]
+}

@@ -1,0 +1,9 @@
+{
+	"name": "wander",
+	"type": "Wander",
+	"speed": 0.5,
+	"target": "origin",
+	"wanderRange": 2.0,
+	"minChangeThreshold": 0.01,
+	"maxChangeThreshold": 0.5
+}
