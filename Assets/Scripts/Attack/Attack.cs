@@ -12,17 +12,18 @@ public class Attack
     public float rateOfFire = 1f;
     public float minDamage;
     public float maxDamage;
-    public bool ignoreArmor;
+    public bool ignoreArmor = false;
     public int angleOffset = 0;
     public int angleGap = 0;
-    public int angleChange;
+    public int angleChange = 0;
     public bool onMouse = false;
     public string target = null;
     public MultiplierData acceleration = null;
     public PositionData2d positionOffset = null;
+    public bool offsetPositionTowardsMouse = true;
     public StatusEffect[] statusEffects;
 
-    public Attack(string sprite, float lifetime, float speed, int projectileCount, float rateOfFire, float minDamage, float maxDamage, bool ignoreArmor, int angleOffset, int angleGap, int angleChange, bool onMouse, string target, MultiplierData acceleration, PositionData2d positionOffset, StatusEffect[] statusEffects)
+    public Attack(string sprite, float lifetime, float speed, int projectileCount, float rateOfFire, float minDamage, float maxDamage, bool ignoreArmor, int angleOffset, int angleGap, int angleChange, bool onMouse, string target, MultiplierData acceleration, PositionData2d positionOffset, bool offsetPositionTowardsMouse, StatusEffect[] statusEffects)
     {
         this.sprite = sprite;
         this.lifetime = lifetime;
@@ -39,6 +40,7 @@ public class Attack
         this.target = target;
         this.acceleration = acceleration;
         this.positionOffset = positionOffset;
+        this.offsetPositionTowardsMouse = offsetPositionTowardsMouse;
         this.statusEffects = statusEffects;
     }
 
@@ -80,6 +82,7 @@ public class Attack
             two.target == null ? one.target : two.target,
             MultiplierData.Override(one.acceleration, two.acceleration),
             PositionData2d.Override(one.positionOffset, two.positionOffset),
+            two.offsetPositionTowardsMouse,
             two.statusEffects == null ? one.statusEffects : two.statusEffects
         );
     }
@@ -103,14 +106,19 @@ public class Attack
     {
         if (projectileCount > 0)
         {
-            Vector3 position = (onMouse ? MouseUtil.GetMouseWorldPos() : character.transform.position) + positionOffset.GetAsVector3();
+            Vector3 position = onMouse ? MouseUtil.GetMouseWorldPos() : character.transform.position;
+            // offset position
+            if (offsetPositionTowardsMouse) position += VectorUtil.Scale(MouseUtil.GetMouseDirection(position).normalized, positionOffset.GetAsVector3());
+            else position += positionOffset.GetAsVector3();
+
             float angle = MouseUtil.GetMouseAngle(position) + angleOffset;
             if (angle < 0) angle += 360f;
             if (projectileCount > 1) angle -= angleGap * (((projectileCount - 1f) / 2f) + 1);
 
+            GameObject obj;
             for (int i = 0; i < projectileCount; ++i)
             {
-                GameObject obj = pool.GetObject();
+                obj = pool.GetObject();
                 if (obj != null)
                 {
                     obj.GetComponent<Projectile>().SetProperties(position, this, MathUtil.GetDirection((MouseUtil.GetMouseWorldPos() - position).normalized, angle += angleGap), Mathf.RoundToInt(UnityEngine.Random.Range(minDamage, maxDamage)) * ((character.stats.attack + 25f) / 50f));
@@ -130,9 +138,10 @@ public class Attack
             if (angle < 0) angle += 360f;
             if (projectileCount > 1) angle -= angleGap * (((projectileCount - 1f) / 2f) + 1);
 
+            GameObject obj;
             for (int i = 0; i < projectileCount; ++i)
             {
-                GameObject obj = pool.GetObject();
+                obj = pool.GetObject();
                 if (obj != null)
                 {
                     obj.GetComponent<Projectile>().SetProperties(position, this, MathUtil.GetDirection((targetPosition - position).normalized, angle += angleGap), Mathf.RoundToInt(UnityEngine.Random.Range(minDamage, maxDamage)) * ((enemy.stats.attack + 25f) / 50f));

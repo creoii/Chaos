@@ -1,6 +1,6 @@
-﻿using UnityEngine.UI;
-using UnityEngine;
+﻿using System;
 
+[Serializable]
 public class ClassInventory : Inventory
 {
     public ItemType[] classItemTypes;
@@ -16,6 +16,5 @@ public class ClassInventory : Inventory
 
     public ClassInventory(ItemType weapon, ItemType ability, ItemType armor) : this(new ItemType[4] {weapon, ability, armor, ItemType.Accessory})
     {
-
     }
 }
