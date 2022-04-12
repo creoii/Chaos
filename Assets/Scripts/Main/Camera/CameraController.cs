@@ -38,8 +38,8 @@ public class CameraController : MonoBehaviour
         }
 
         // APPLY OFFSET AND LERP
-        Vector3 desired = character.transform.position + offset;
-        Vector3 smoothed = Vector3.Lerp(transform.position, desired, lerpSpeed * Time.deltaTime);
-        transform.position = smoothed;
+        transform.position = Vector3.Lerp(transform.position, character.transform.position + offset, lerpSpeed * Time.deltaTime);
+        // APPLY OFFSET
+        transform.position = character.transform.position + offset;
     }
 }

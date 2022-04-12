@@ -4,7 +4,7 @@ using UnityEngine;
 [Serializable]
 public class Attack
 {
-    public string name = null;
+    public string name;
     public string sprite;
     public float lifetime;
     public float speed;
@@ -121,7 +121,7 @@ public class Attack
                 obj = pool.GetObject();
                 if (obj != null)
                 {
-                    obj.GetComponent<Projectile>().SetProperties(position, this, MathUtil.GetDirection((MouseUtil.GetMouseWorldPos() - position).normalized, angle += angleGap), Mathf.RoundToInt(UnityEngine.Random.Range(minDamage, maxDamage)) * ((character.stats.attack + 25f) / 50f));
+                    obj.GetComponent<Projectile>().SetProperties(position, this, MathUtil.GetDirection(MouseUtil.GetMouseWorldPos() - position, angle += angleGap), Mathf.RoundToInt(UnityEngine.Random.Range(minDamage, maxDamage)) * ((character.stats.attack + 25f) / 50f));
                     obj.SetActive(true);
                 }
             }
@@ -144,7 +144,7 @@ public class Attack
                 obj = pool.GetObject();
                 if (obj != null)
                 {
-                    obj.GetComponent<Projectile>().SetProperties(position, this, MathUtil.GetDirection((targetPosition - position).normalized, angle += angleGap), Mathf.RoundToInt(UnityEngine.Random.Range(minDamage, maxDamage)) * ((enemy.stats.attack + 25f) / 50f));
+                    obj.GetComponent<Projectile>().SetProperties(position, this, MathUtil.GetDirection(targetPosition - position, angle += angleGap), Mathf.RoundToInt(UnityEngine.Random.Range(minDamage, maxDamage)) * ((enemy.stats.attack + 25f) / 50f));
                     obj.SetActive(true);
                     angleOffset += angleChange;
                 }
