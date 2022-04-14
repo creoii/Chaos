@@ -128,22 +128,26 @@ public class Character : Entity
 
     public override void Heal(float amount)
     {
+        base.Heal(amount);
         playerInterface.UpdateHealthBar();
     }
 
     public override void HealMana(float amount)
     {
+        base.HealMana(amount);
         playerInterface.UpdateManaBar();
     }
 
     public override void Damage(float amount, bool ignoreArmor)
     {
+        base.Damage(amount, ignoreArmor);
         inCombat = 5f;
         playerInterface.UpdateHealthBar();
     }
 
     public override void DamageMana(float amount)
     {
+        base.DamageMana(amount);
         playerInterface.UpdateManaBar();
     }
 
