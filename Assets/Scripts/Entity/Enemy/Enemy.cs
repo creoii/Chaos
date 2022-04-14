@@ -55,7 +55,6 @@ public class Enemy : Entity
                 currentPhase.Run(this);
                 currentPhase = GetNextPhase(currentPhase);
                 phaseTime = 0f;
-                Debug.Log(currentPhase.name);
             }
             else if (phaseTime >= currentPhase.delay)
             {
@@ -66,9 +65,18 @@ public class Enemy : Entity
         }
     }
 
+    public override void OnHit(Projectile projectile, float damage, bool ignoreArmor)
+    {
+        base.OnHit(projectile, damage, ignoreArmor);
+        if (projectile.owner is Character character)
+        {
+            ++character.statistics.hits;
+            character.statistics.UpdateAccuracy();
+        }
+    }
+
     public Phase GetNextPhase(Phase phase)
     {
-        Debug.Log(phase.transitions[0].nextPhases == null);
         string name = phase.transitions[0].nextPhases[UnityEngine.Random.Range(0, phase.transitions[0].nextPhases.Length)];
         foreach (Phase list in enemy.phases)
         {

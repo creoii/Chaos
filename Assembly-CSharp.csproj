@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\StatusEffect\StatusEffect.cs" />
+    <Compile Include="Assets\Scripts\Entity\Enemy\BossEnemy.cs" />
     <Compile Include="Assets\Scripts\Main\Game.cs" />
     <Compile Include="Assets\Scripts\Item\AbilityItem.cs" />
     <Compile Include="Assets\Scripts\Data\Builder\MovementBuilder.cs" />
@@ -79,12 +80,15 @@
     <Compile Include="Assets\Scripts\Inventory\Inventory.cs" />
     <Compile Include="Assets\Scripts\Main\Camera\CameraController.cs" />
     <Compile Include="Assets\Scripts\Main\Util\ItemUtil.cs" />
+    <Compile Include="Assets\Scripts\Entity\Enemy\Enemy.cs" />
     <Compile Include="Assets\Scripts\Item\ArmorItem.cs" />
     <Compile Include="Assets\Scripts\Data\PositionData2d.cs" />
+    <Compile Include="Assets\Scripts\Main\Util\CollectionUtil.cs" />
     <Compile Include="Assets\Scripts\Item\Category\ItemRarity.cs" />
     <Compile Include="Assets\Scripts\Data\Builder\PhaseBuilder.cs" />
     <Compile Include="Assets\Scripts\Data\Builder\StatusEffectBuilder.cs" />
     <Compile Include="Assets\Scripts\Data\PositionData3d.cs" />
+    <Compile Include="Assets\Scripts\Entity\Enemy\BasicEnemy.cs" />
     <Compile Include="Assets\Scripts\Attack\Projectile\Projectile.cs" />
     <Compile Include="Assets\Scripts\Main\Util\WorldUtil.cs" />
     <Compile Include="Assets\Scripts\Item\Item.cs" />
@@ -98,6 +102,7 @@
     <Compile Include="Assets\Scripts\Data\Builder\TileProviderBuilder.cs" />
     <Compile Include="Assets\Scripts\Tile\TileProvider.cs" />
     <Compile Include="Assets\Scripts\Movement\MovementType.cs" />
+    <Compile Include="Assets\Scripts\Entity\Player\CharacterStatistics.cs" />
     <Compile Include="Assets\Scripts\Dungeon\Dungeon.cs" />
     <Compile Include="Assets\Scripts\Entity\Player\Class\Classes.cs" />
     <Compile Include="Assets\Scripts\Data\LevelData.cs" />
@@ -112,11 +117,6 @@
     <Compile Include="Assets\Scripts\UI\PlayerInterface.cs" />
     <Compile Include="Assets\Scripts\Data\Builder\DungeonBuilder.cs" />
     <Compile Include="Assets\Scripts\Entity\Enemy\Phase\Transition.cs" />
-    <Compile Include="Assets\Scripts\Entity\Player\CharacterStatistics.cs" />
-    <Compile Include="Assets\Scripts\Main\Util\CollectionUtil.cs" />
-    <Compile Include="Assets\Scripts\Entity\Enemy\BasicEnemy.cs" />
-    <Compile Include="Assets\Scripts\Entity\Enemy\BossEnemy.cs" />
-    <Compile Include="Assets\Scripts\Entity\Enemy\Enemy.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

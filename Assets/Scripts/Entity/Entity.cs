@@ -1,11 +1,24 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
 
 public class Entity : MonoBehaviour
 {
     public ObjectPool pool;
     public StatData stats;
     public List<StatusEffect> activeEffects = new List<StatusEffect>();
+
+    public virtual void OnHit(Projectile projectile, float damage, bool ignoreArmor)
+    {
+        Damage(damage, false);
+        if (projectile.attack.statusEffects != null)
+        {
+            foreach (StatusEffect effect in projectile.attack.statusEffects)
+            {
+                AddStatusEffect(effect);
+            }
+        }
+    }
 
     public void AddStatusEffect(StatusEffect effect)
     {

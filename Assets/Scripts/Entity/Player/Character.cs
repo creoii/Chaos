@@ -9,6 +9,7 @@ public class Character : Entity
     public LevelData level = new LevelData();
     public float inCombat = 0f;
 
+    private SpriteRenderer sprite;
     private Vector3 movement;
     private float movementModifier = .1f;
 
@@ -25,11 +26,12 @@ public class Character : Entity
         playerClass.classInventory.slots[0].SetItem(ItemBuilder.weapons[0]);
         playerClass.classInventory.slots[1].SetItem(ItemBuilder.abilities[0]);
 
+        sprite = GetComponent<SpriteRenderer>();
         pool = GetComponentInChildren<ObjectPool>();
         playerInterface = GetComponentInChildren<PlayerInterface>();
         StartInventory(playerClass.classInventory);
 
-        SpriteUtil.SetSprite(GetComponent<SpriteRenderer>(), "Sprites/Characters/Classes/" + playerClass.sprite);
+        SpriteUtil.SetSprite(sprite, "Sprites/Characters/Classes/" + playerClass.sprite);
 
         StartCoroutine(UpdateRegeneration(.12f * (stats.healthRegeneration + 8.3f), .12f * (stats.manaRegeneration + 8.3f)));
     }
@@ -117,13 +119,18 @@ public class Character : Entity
 
     IEnumerator UpdateRegeneration(float amount, float manaAmount)
     {
-        for (;;) {
+        for (; ; ) {
             Heal(amount);
             playerInterface.UpdateHealthBar();
             HealMana(manaAmount);
             playerInterface.UpdateManaBar();
             yield return new WaitForSeconds(1f);
         }
+    }
+
+    public override void OnHit(Projectile projectile, float damage, bool ignoreArmor)
+    {
+        base.OnHit(projectile, damage, ignoreArmor);
     }
 
     public override void Heal(float amount)
