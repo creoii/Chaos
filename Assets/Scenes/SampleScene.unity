@@ -542,7 +542,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 26.991467
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -796,6 +796,54 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pool: {fileID: 0}
   playerInterface: {fileID: 0}
+  playerClass:
+    sprite: warrior
+    classInventory:
+      classItemTypes: 00000000030000000c0000000d000000
+    baseStats:
+      maxHealth: 150
+      health: 150
+      maxMana: 100
+      mana: 100
+      speed: 8
+      attackSpeed: 10
+      healthRegeneration: 5
+      manaRegeneration: 5
+      armor: 4
+      attack: 5
+    maxStats:
+      maxHealth: 750
+      health: 750
+      maxMana: 250
+      mana: 250
+      speed: 70
+      attackSpeed: 60
+      healthRegeneration: 60
+      manaRegeneration: 60
+      armor: 35
+      attack: 70
+    minStatLvlIncrease:
+      maxHealth: 10
+      health: 10
+      maxMana: 10
+      mana: 10
+      speed: 1
+      attackSpeed: 1
+      healthRegeneration: 1
+      manaRegeneration: 1
+      armor: 0
+      attack: 1
+    maxStatLvlIncrease:
+      maxHealth: 10
+      health: 10
+      maxMana: 10
+      mana: 10
+      speed: 2
+      attackSpeed: 2
+      healthRegeneration: 2
+      manaRegeneration: 2
+      armor: 0
+      attack: 2
   stats:
     maxHealth: 0
     health: 0

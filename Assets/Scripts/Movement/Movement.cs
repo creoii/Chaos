@@ -84,7 +84,7 @@ public class Movement
         {
             if (Vector3.Distance(enemy.GetPosition(), wanderTarget) >= UnityEngine.Random.Range(minChangeThreshold, maxChangeThreshold))
             {
-                enemy.SetPosition(Vector3.MoveTowards(enemy.GetPosition(), wanderTarget, speed * Time.deltaTime));
+                enemy.transform.position = Vector3.MoveTowards(enemy.GetPosition(), wanderTarget, speed * Time.deltaTime);
             }
             else atTarget = true;
         }
@@ -94,7 +94,7 @@ public class Movement
     {
         if (Vector3.Distance(enemy.GetPosition(), orbitStartTranslation.GetAsVector3() * orbitDistance) >= orbitDistance)
         {
-            enemy.SetPosition(Vector3.MoveTowards(enemy.GetPosition(), orbitStartTranslation.GetAsVector3() * orbitDistance, startSpeed * Time.deltaTime));
+            enemy.transform.position = Vector3.MoveTowards(enemy.GetPosition(), orbitStartTranslation.GetAsVector3() * orbitDistance, startSpeed * Time.deltaTime);
         }
         //else entity.transform.RotateAround(center, -Vector3.forward, speed * Time.deltaTime);
     }
@@ -103,7 +103,7 @@ public class Movement
     {
         if (Vector3.Distance(enemy.GetPosition(), target.transform.position) >= UnityEngine.Random.Range(minChangeThreshold, maxChangeThreshold))
         {
-            enemy.SetPosition(Vector3.MoveTowards(enemy.GetPosition(), target.transform.position, speed * Time.deltaTime));
+            enemy.transform.position = Vector3.MoveTowards(enemy.GetPosition(), target.transform.position, speed * Time.deltaTime);
         }
     }
 }

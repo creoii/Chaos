@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+    public Entity owner;
     public Attack attack;
     public Vector3 direction;
     public float speed;
@@ -9,8 +10,9 @@ public class Projectile : MonoBehaviour
     private float damage;
     private float life;
 
-    public Projectile SetProperties(Vector3 position, Attack attack, Vector3 direction, float damage)
+    public Projectile WithProperties(Entity owner, Vector3 position, Attack attack, Vector3 direction, float damage)
     {
+        this.owner = owner;
         transform.position = position;
         this.attack = attack;
         speed = attack.speed * 10f;
@@ -55,9 +57,7 @@ public class Projectile : MonoBehaviour
         if (collision.gameObject.tag.Equals("Character") && gameObject.tag.Equals("EnemyProjectile"))
         {
             Character character = collision.gameObject.GetComponent<Character>();
-            if (damage - character.stats.armor <= damage * .1f) damage *= .1f;
-            else damage -= character.stats.armor;
-            character.Damage(damage);
+            character.Damage(damage, false);
             if (attack.statusEffects != null)
             {
                 foreach (StatusEffect effect in attack.statusEffects)
@@ -69,10 +69,15 @@ public class Projectile : MonoBehaviour
         }
         else if (collision.gameObject.tag.Equals("Enemy") && gameObject.tag.Equals("PlayerProjectile"))
         {
-            Enemy enemy = collision.gameObject.GetComponent<Entity>().enemy;
-            if (damage - enemy.stats.armor <= damage * .1f) damage *= .1f;
-            else damage -= enemy.stats.armor;
-            enemy.Damage(damage);
+            Enemy enemy = collision.gameObject.GetComponent<Enemy>();
+            enemy.Damage(damage, false);
+
+            if (owner is Character character)
+            {
+                ++character.statistics.hits;
+                character.statistics.UpdateAccuracy();
+            }
+
             if (attack.statusEffects != null)
             {
                 foreach (StatusEffect effect in attack.statusEffects)

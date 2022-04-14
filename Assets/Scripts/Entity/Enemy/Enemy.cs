@@ -1,41 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
 using UnityEngine;
 
-[Serializable]
-public class Enemy
+public class Enemy : Entity
 {
-    public string name;
-    public string sprite;
-    public float xp;
-    public StatData stats;
-    public bool isBoss = false;
-    public Phase[] phases;
+    public BasicEnemy enemy;
     private Vector3 origin;
-    private Vector3 position;
     private Phase currentPhase;
     public float phaseTime;
-    public List<StatusEffect> activeEffects = new List<StatusEffect>();
     public GameObject targetCharacter;
 
-    public Enemy(string name, string sprite, StatData stats)
+    private void Start()
     {
-        this.name = name;
-        this.sprite = sprite;
-        this.stats = stats;
-    }
+        enemy = EnemyBuilder.enemies[UnityEngine.Random.Range(0, EnemyBuilder.enemies.Count)];
+        stats = enemy.stats;
+        origin = transform.position;
 
-    public Enemy(string name, string sprite, StatData stats, bool isBoss) : this(name, sprite, stats)
-    {
-        this.isBoss = isBoss;
-    }
+        pool = GetComponentInChildren<ObjectPool>();
+        SpriteUtil.SetSprite(GetComponent<SpriteRenderer>(), "Sprites/Characters/Enemies/" + enemy.sprite);
 
-    public void Start(Vector3 origin)
-    {
         stats.health = stats.maxHealth;
-        this.origin = origin;
-        SetPosition(origin);
         targetCharacter = GameObject.FindGameObjectWithTag("Character");
+        Phase[] phases = enemy.phases;
         if (phases != null)
         {
             for (int i = 0; i < phases.Length; ++i)
@@ -54,9 +39,13 @@ public class Enemy
             }
             currentPhase = phases[0];
         }
+        else
+        {
+            phases = new Phase[1] { new Phase("default", 5, 0, new Attack[0], new Movement[0], new Transition[0]) };
+        }
     }
 
-    public void UpdatePhase(ObjectPool pool)
+    private void Update()
     {
         if (targetCharacter.activeInHierarchy)
         {
@@ -81,51 +70,16 @@ public class Enemy
     {
         Debug.Log(phase.transitions[0].nextPhases == null);
         string name = phase.transitions[0].nextPhases[UnityEngine.Random.Range(0, phase.transitions[0].nextPhases.Length)];
-        foreach (Phase list in phases)
+        foreach (Phase list in enemy.phases)
         {
             if (list.name.Equals(name)) return list;
         }
         return null;
     }
 
-    public void AddStatusEffect(StatusEffect effect)
-    {
-        bool apply = true;
-        foreach (StatusEffect active in activeEffects)
-        {
-            if (active.name.Equals(effect.name)) apply = false;
-        }
-
-        if (apply)
-        {
-            activeEffects.Add(effect);
-            effect.Apply(this);
-        }
-    }
-
-    public void Damage(float amount)
-    {
-        if (stats.health - amount < 0)
-        {
-            //character.UpdateLeveling(xp);
-            Kill();
-        }
-        else stats.health -= amount;
-    }
-
-    private void Kill()
-    {
-        stats.health = 0;
-    }
-
-    public void SetPosition(Vector3 position)
-    {
-        this.position = position;
-    }
-
     public Vector3 GetPosition()
     {
-        return position;
+        return transform.position;
     }
 
     public Vector3 GetOrigin()

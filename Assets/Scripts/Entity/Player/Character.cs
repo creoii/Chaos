@@ -1,15 +1,12 @@
 using UnityEngine;
-using System.Collections.Generic;
 using System.Collections;
 
-public class Character : MonoBehaviour
+public class Character : Entity
 {
-    public ObjectPool pool;
     public PlayerInterface playerInterface;
+    public CharacterStatistics statistics;
     public PlayerClass playerClass = Classes.Warrior;
-    public StatData stats;
     public LevelData level = new LevelData();
-    public List<StatusEffect> activeEffects = new List<StatusEffect>();
     public float inCombat = 0f;
 
     private Vector3 movement;
@@ -17,6 +14,7 @@ public class Character : MonoBehaviour
 
     void Awake()
     {
+        statistics = new CharacterStatistics();
         stats = playerClass.maxStats;
     }
 
@@ -111,22 +109,6 @@ public class Character : MonoBehaviour
         }
     }
 
-    public void AddStatusEffect(StatusEffect effect)
-    {
-        // 0 means don't apply, 1 means add to, 2 means replace
-        int apply = 0;
-        foreach (StatusEffect active in activeEffects)
-        {
-            if (active.name.Equals(effect.name)) apply = 1;
-        }
-
-        if (apply == 0 && isActiveAndEnabled)
-        {
-            activeEffects.Add(effect);
-            StartCoroutine(effect.Apply(this));
-        }
-    }
-
     public void UpdateLeveling(float xp)
     {
         level.xp += xp;
@@ -144,51 +126,25 @@ public class Character : MonoBehaviour
         }
     }
 
-    public void Heal(float amount)
+    public override void Heal(float amount)
     {
-        if (stats.health + amount > stats.maxHealth)
-        {
-            stats.health = stats.maxHealth;
-        }
-        else stats.health += amount;
         playerInterface.UpdateHealthBar();
     }
 
-    public void HealMana(float amount)
+    public override void HealMana(float amount)
     {
-        if (stats.mana + amount > stats.maxMana)
-        {
-            stats.mana = stats.maxMana;
-        }
-        else stats.mana += amount;
         playerInterface.UpdateManaBar();
     }
 
-    public void Damage(float amount)
+    public override void Damage(float amount, bool ignoreArmor)
     {
-        if (stats.health - amount < 0)
-        {
-            Kill();
-        }
-        else stats.health -= amount;
         inCombat = 5f;
         playerInterface.UpdateHealthBar();
     }
 
-    public void DamageMana(float amount)
+    public override void DamageMana(float amount)
     {
-        if (stats.mana - amount < 0)
-        {
-            stats.mana = 0;
-        }
-        else stats.mana -= amount;
         playerInterface.UpdateManaBar();
-    }
-
-    void Kill()
-    {
-        stats.health = 0;
-        gameObject.SetActive(false);
     }
 
     public void AddMaxHealth(float maxHealth)

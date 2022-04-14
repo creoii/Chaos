@@ -5,40 +5,34 @@ public class DungeonGenerator : MonoBehaviour
 {
     private Dungeon dungeon;
 
-    public List<Room> starts;
-    public List<Room> standards;
-    public List<Room> hallways;
-    public List<Room> bosses;
-    public List<Room> treasures;
+    public Room[] starts;
+    public Room[] standards;
+    public Room[] hallways;
+    public Room[] bosses;
+    public Room[] treasures;
 
     private void Start()
     {
         dungeon = DungeonBuilder.dungeons[0];
-
-        starts = new List<Room>();
-        standards = new List<Room>();
-        hallways = new List<Room>();
-        bosses = new List<Room>();
-        treasures = new List<Room>();
 
         foreach (Room room in dungeon.rooms)
         {
             switch(room.type)
             {
                 case "Start":
-                    starts.Add(room);
+                    starts = CollectionUtil.ArrayAdd(starts, room);
                     break;
                 case "Standard":
-                    standards.Add(room);
+                    standards = CollectionUtil.ArrayAdd(standards, room);
                     break;
                 case "Hallway":
-                    hallways.Add(room);
+                    hallways = CollectionUtil.ArrayAdd(hallways, room);
                     break;
                 case "Boss":
-                    bosses.Add(room);
+                    bosses = CollectionUtil.ArrayAdd(bosses, room);
                     break;
                 case "Treasure":
-                    treasures.Add(room);
+                    treasures = CollectionUtil.ArrayAdd(treasures, room);
                     break;
             }
         }
@@ -46,6 +40,6 @@ public class DungeonGenerator : MonoBehaviour
 
     public void Generate(Vector3 position)
     {
-        starts[Random.Range(0, starts.Count)].Generate(position, WorldUtil.GetWorldTilemap());
+        starts[Random.Range(0, starts.Length)].Generate(position, WorldUtil.GetWorldTilemap());
     }
 }

@@ -27,14 +27,14 @@ public class CameraController : MonoBehaviour
         if (Input.GetKey(KeyCode.Q))
         {
             // ROTATE LEFT
-            transform.Rotate(0f, 0f, -1f);
-            character.transform.Rotate(0f, 0f, -1.2f);
+            transform.RotateAround(character.transform.position + offset, Vector3.back, 1);
+            character.transform.Rotate(0f, 0f, -1.1525f);
         } 
         else if (Input.GetKey(KeyCode.E))
         {
             //ROTATE RIGHT
-            transform.Rotate(0f, 0f, 1f);
-            character.transform.Rotate(0f, 0f, 1.2f);
+            transform.RotateAround(character.transform.position + offset, Vector3.forward, 1);
+            character.transform.Rotate(0f, 0f, 1.1525f);
         }
 
         // APPLY OFFSET AND LERP

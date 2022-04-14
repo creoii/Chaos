@@ -36,19 +36,11 @@ public class StatusEffect
         );
     }
 
-    public IEnumerator Apply(Character character)
+    public IEnumerator Apply(Entity entity)
     {
-        character.stats.Add(statChange);
+        entity.stats.Add(statChange);
         yield return new WaitForSeconds(duration);
-        character.activeEffects.Remove(this);
-        if (!instant) character.stats.Subtract(statChange);
-    }
-
-    public IEnumerator Apply(Enemy enemy)
-    {
-        enemy.stats.Add(statChange);
-        yield return new WaitForSeconds(duration);
-        enemy.activeEffects.Remove(this);
-        if (!instant) enemy.stats.Subtract(statChange);
+        entity.activeEffects.Remove(this);
+        if (!instant) entity.stats.Subtract(statChange);
     }
 }

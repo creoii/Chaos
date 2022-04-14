@@ -8,7 +8,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <ProjectGuid>{E6915411-7C9E-0701-7535-87615D975C5B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -59,22 +60,22 @@
     <Compile Include="Assets\Scripts\StatusEffect\StatusEffect.cs" />
     <Compile Include="Assets\Scripts\Main\Game.cs" />
     <Compile Include="Assets\Scripts\Item\AbilityItem.cs" />
-    <Compile Include="Assets\Scripts\Enemy\BossEnemy.cs" />
+    <Compile Include="Assets\Scripts\Entity\BossEnemy.cs" />
     <Compile Include="Assets\Scripts\Data\Builder\MovementBuilder.cs" />
     <Compile Include="Assets\Scripts\Main\Util\SpriteUtil.cs" />
     <Compile Include="Assets\Scripts\Item\ConsumableItem.cs" />
     <Compile Include="Assets\Scripts\Item\SigilItem.cs" />
-    <Compile Include="Assets\Scripts\Player\Player.cs" />
+    <Compile Include="Assets\Scripts\Entity\Player\Player.cs" />
     <Compile Include="Assets\Scripts\Attack\Pool\ObjectPool.cs" />
     <Compile Include="Assets\Scripts\Data\Builder\AttackBuilder.cs" />
     <Compile Include="Assets\Scripts\Data\Builder\ItemBuilder.cs" />
     <Compile Include="Assets\Scripts\Data\StatData.cs" />
-    <Compile Include="Assets\Scripts\Enemy\Phase\Phase.cs" />
+    <Compile Include="Assets\Scripts\Entity\Phase\Phase.cs" />
     <Compile Include="Assets\Scripts\Inventory\Slot.cs" />
     <Compile Include="Assets\Scripts\Attack\Attack.cs" />
     <Compile Include="Assets\Scripts\Item\WeaponItem.cs" />
     <Compile Include="Assets\Scripts\Main\Util\MouseUtil.cs" />
-    <Compile Include="Assets\Scripts\Enemy\Entity.cs" />
+    <Compile Include="Assets\Scripts\Entity\Entity.cs" />
     <Compile Include="Assets\Scripts\Main\Util\EnumUtil.cs" />
     <Compile Include="Assets\Scripts\Data\Builder\RoomBuilder.cs" />
     <Compile Include="Assets\Scripts\Inventory\Inventory.cs" />
@@ -100,11 +101,11 @@
     <Compile Include="Assets\Scripts\Tile\TileProvider.cs" />
     <Compile Include="Assets\Scripts\Movement\MovementType.cs" />
     <Compile Include="Assets\Scripts\Dungeon\Dungeon.cs" />
-    <Compile Include="Assets\Scripts\Enemy\Enemy.cs" />
-    <Compile Include="Assets\Scripts\Player\Class\Classes.cs" />
+    <Compile Include="Assets\Scripts\Entity\Enemy.cs" />
+    <Compile Include="Assets\Scripts\Entity\Player\Class\Classes.cs" />
     <Compile Include="Assets\Scripts\Data\LevelData.cs" />
-    <Compile Include="Assets\Scripts\Player\Class\PlayerClass.cs" />
-    <Compile Include="Assets\Scripts\Player\Character.cs" />
+    <Compile Include="Assets\Scripts\Entity\Player\Class\PlayerClass.cs" />
+    <Compile Include="Assets\Scripts\Entity\Player\Character.cs" />
     <Compile Include="Assets\Scripts\Main\Util\MathUtil.cs" />
     <Compile Include="Assets\Scripts\Item\TokenItem.cs" />
     <Compile Include="Assets\Scripts\Item\AccessoryItem.cs" />
@@ -113,7 +114,10 @@
     <Compile Include="Assets\Scripts\Data\MultiplierData.cs" />
     <Compile Include="Assets\Scripts\UI\PlayerInterface.cs" />
     <Compile Include="Assets\Scripts\Data\Builder\DungeonBuilder.cs" />
-    <Compile Include="Assets\Scripts\Enemy\Phase\Transition.cs" />
+    <Compile Include="Assets\Scripts\Entity\Phase\Transition.cs" />
+    <Compile Include="Assets\Scripts\Entity\Player\CharacterStatistics.cs" />
+    <Compile Include="Assets\Scripts\Main\Util\CollectionUtil.cs" />
+    <Compile Include="Assets\Scripts\Entity\BasicEnemy.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

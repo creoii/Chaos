@@ -118,10 +118,11 @@ public class Attack
             GameObject obj;
             for (int i = 0; i < projectileCount; ++i)
             {
+                ++character.statistics.shots;
                 obj = pool.GetObject();
                 if (obj != null)
                 {
-                    obj.GetComponent<Projectile>().SetProperties(position, this, MathUtil.GetDirection(MouseUtil.GetMouseWorldPos() - position, angle += angleGap), Mathf.RoundToInt(UnityEngine.Random.Range(minDamage, maxDamage)) * ((character.stats.attack + 25f) / 50f));
+                    obj.GetComponent<Projectile>().WithProperties(character, position, this, MathUtil.GetDirection(MouseUtil.GetMouseWorldPos() - position, angle += angleGap), Mathf.RoundToInt(UnityEngine.Random.Range(minDamage, maxDamage)) * ((character.stats.attack + 25f) / 50f));
                     obj.SetActive(true);
                 }
             }
@@ -144,7 +145,7 @@ public class Attack
                 obj = pool.GetObject();
                 if (obj != null)
                 {
-                    obj.GetComponent<Projectile>().SetProperties(position, this, MathUtil.GetDirection(targetPosition - position, angle += angleGap), Mathf.RoundToInt(UnityEngine.Random.Range(minDamage, maxDamage)) * ((enemy.stats.attack + 25f) / 50f));
+                    obj.GetComponent<Projectile>().WithProperties(enemy, position, this, MathUtil.GetDirection(targetPosition - position, angle += angleGap), Mathf.RoundToInt(UnityEngine.Random.Range(minDamage, maxDamage)) * ((enemy.stats.attack + 25f) / 50f));
                     obj.SetActive(true);
                     angleOffset += angleChange;
                 }
