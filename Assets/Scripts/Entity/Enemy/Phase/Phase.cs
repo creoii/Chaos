@@ -24,7 +24,7 @@ public class Phase
         this.transitions = transitions;
     }
 
-    public void Start(Enemy enemy, GameObject character)
+    public void Start(Enemy enemy, Character character)
     {
         if (attacks != null)
         {
@@ -88,7 +88,7 @@ public class Phase
         );
     }
 
-    public void Update(Enemy enemy, GameObject character, ObjectPool pool)
+    public void Update(Enemy enemy, Character character, ObjectPool pool)
     {
         if (attacks != null)
         {

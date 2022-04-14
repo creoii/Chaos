@@ -49,7 +49,7 @@ public class Movement
         );
     }
 
-    public void Start(Enemy enemy, GameObject character)
+    public void Start(Enemy enemy, Character character)
     {
         targetPos = enemy.GetPosition();
         if (target.Equals("origin")) targetPos = enemy.GetOrigin();
@@ -57,23 +57,23 @@ public class Movement
         else if (target.Equals("mouse")) targetPos = MouseUtil.GetMouseWorldPos();
     }
 
-    public void Run(Enemy enemy, GameObject character)
+    public void Run(Enemy enemy, Character character)
     {
         switch (EnumUtil.Parse<MovementType>(type))
         {
             case MovementType.Wander:
-                RunWander(enemy, targetPos);
+                Wander(enemy, targetPos);
                 return;
             case MovementType.Orbit:
-                RunOrbit(enemy, targetPos);
+                Orbit(enemy, targetPos);
                 return;
             case MovementType.Follow:
-                RunFollow(enemy, character);
+                Follow(enemy, character);
                 return;
         }
     }
 
-    void RunWander(Enemy enemy, Vector3 center)
+    void Wander(Enemy enemy, Vector3 center)
     {
         if (atTarget)
         {
@@ -90,7 +90,7 @@ public class Movement
         }
     }
 
-    void RunOrbit(Enemy enemy, Vector3 center)
+    void Orbit(Enemy enemy, Vector3 center)
     {
         if (Vector3.Distance(enemy.GetPosition(), orbitStartTranslation.GetAsVector3() * orbitDistance) >= orbitDistance)
         {
@@ -99,7 +99,7 @@ public class Movement
         //else entity.transform.RotateAround(center, -Vector3.forward, speed * Time.deltaTime);
     }
 
-    void RunFollow(Enemy enemy, GameObject target)
+    void Follow(Enemy enemy, Character target)
     {
         if (Vector3.Distance(enemy.GetPosition(), target.transform.position) >= UnityEngine.Random.Range(minChangeThreshold, maxChangeThreshold))
         {

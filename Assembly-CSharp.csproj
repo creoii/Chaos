@@ -117,6 +117,7 @@
     <Compile Include="Assets\Scripts\UI\PlayerInterface.cs" />
     <Compile Include="Assets\Scripts\Data\Builder\DungeonBuilder.cs" />
     <Compile Include="Assets\Scripts\Entity\Enemy\Phase\Transition.cs" />
+    <Compile Include="Assets\Scripts\Data\SeekingData.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

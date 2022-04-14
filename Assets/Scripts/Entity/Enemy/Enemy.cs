@@ -7,7 +7,7 @@ public class Enemy : Entity
     private Vector3 origin;
     private Phase currentPhase;
     public float phaseTime;
-    public GameObject targetCharacter;
+    public Character targetCharacter;
 
     private void Start()
     {
@@ -19,7 +19,7 @@ public class Enemy : Entity
         SpriteUtil.SetSprite(GetComponent<SpriteRenderer>(), "Sprites/Characters/Enemies/" + enemy.sprite);
 
         stats.health = stats.maxHealth;
-        targetCharacter = GameObject.FindGameObjectWithTag("Character");
+        targetCharacter = GameObject.FindGameObjectWithTag("Character").GetComponent<Character>();
         Phase[] phases = enemy.phases;
         if (phases != null)
         {
@@ -47,7 +47,7 @@ public class Enemy : Entity
 
     private void Update()
     {
-        if (targetCharacter.activeInHierarchy)
+        if (targetCharacter.alive)
         {
             if (phaseTime >= currentPhase.delay + currentPhase.duration)
             {

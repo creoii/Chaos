@@ -19,6 +19,7 @@ public class Attack
     public bool onMouse = false;
     public string target = null;
     public MultiplierData acceleration = null;
+    public SeekingData seeking = null;
     public PositionData2d positionOffset = null;
     public bool offsetPositionTowardsMouse = true;
     public StatusEffect[] statusEffects;
@@ -87,7 +88,7 @@ public class Attack
         );
     }
 
-    public Vector3 GetTargetPosition(string target, Enemy enemy, GameObject character)
+    public Vector3 GetTargetPosition(string target, Enemy enemy, Character character)
     {
         switch (target)
         {
@@ -129,7 +130,7 @@ public class Attack
         }
     }
 
-    public void Shoot(Enemy enemy, GameObject character, ObjectPool pool)
+    public void Shoot(Enemy enemy, Character character, ObjectPool pool)
     {
         if (projectileCount > 0)
         {

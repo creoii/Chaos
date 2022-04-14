@@ -7,6 +7,7 @@ public class Entity : MonoBehaviour
     public ObjectPool pool;
     public StatData stats;
     public List<StatusEffect> activeEffects = new List<StatusEffect>();
+    public bool alive = true;
 
     public virtual void OnHit(Projectile projectile, float damage, bool ignoreArmor)
     {
@@ -81,6 +82,7 @@ public class Entity : MonoBehaviour
     void Kill()
     {
         stats.health = 0;
+        alive = false;
         gameObject.SetActive(false);
     }
 }
