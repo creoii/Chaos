@@ -128,9 +128,9 @@ public class Character : Entity
         }
     }
 
-    public override void OnHit(Projectile projectile, float damage, bool ignoreArmor)
+    public override void OnHit(Projectile projectile, float damage, int armorIgnored)
     {
-        base.OnHit(projectile, damage, ignoreArmor);
+        base.OnHit(projectile, damage, armorIgnored);
     }
 
     public override void Heal(float amount)
@@ -145,9 +145,9 @@ public class Character : Entity
         playerInterface.UpdateManaBar();
     }
 
-    public override void Damage(float amount, bool ignoreArmor)
+    public override void Damage(float amount, int armorIgnored)
     {
-        base.Damage(amount, ignoreArmor);
+        base.Damage(amount, armorIgnored);
         inCombat = 5f;
         playerInterface.UpdateHealthBar();
     }

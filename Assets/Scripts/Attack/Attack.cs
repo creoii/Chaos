@@ -12,19 +12,20 @@ public class Attack
     public float rateOfFire = 1f;
     public float minDamage;
     public float maxDamage;
-    public bool ignoreArmor = false;
+    public int armorIgnored = 0;
     public int angleOffset = 0;
     public int angleGap = 0;
     public int angleChange = 0;
     public bool onMouse = false;
     public string target = null;
     public MultiplierData acceleration = null;
+    public OrbitData orbit = null;
     public SeekingData seeking = null;
     public PositionData2d positionOffset = null;
     public bool offsetPositionTowardsMouse = true;
     public StatusEffect[] statusEffects;
 
-    public Attack(string sprite, float lifetime, float speed, int projectileCount, float rateOfFire, float minDamage, float maxDamage, bool ignoreArmor, int angleOffset, int angleGap, int angleChange, bool onMouse, string target, MultiplierData acceleration, PositionData2d positionOffset, bool offsetPositionTowardsMouse, StatusEffect[] statusEffects)
+    public Attack(string sprite, float lifetime, float speed, int projectileCount, float rateOfFire, float minDamage, float maxDamage, int armorIgnored, int angleOffset, int angleGap, int angleChange, bool onMouse, string target, MultiplierData acceleration, OrbitData orbit, PositionData2d positionOffset, bool offsetPositionTowardsMouse, StatusEffect[] statusEffects)
     {
         this.sprite = sprite;
         this.lifetime = lifetime;
@@ -33,13 +34,14 @@ public class Attack
         this.rateOfFire = rateOfFire;
         this.minDamage = minDamage;
         this.maxDamage = maxDamage;
-        this.ignoreArmor = ignoreArmor;
+        this.armorIgnored = armorIgnored;
         this.angleOffset = angleOffset;
         this.angleGap = angleGap;
         this.angleChange = angleChange;
         this.onMouse = onMouse;
         this.target = target;
         this.acceleration = acceleration;
+        this.orbit = orbit;
         this.positionOffset = positionOffset;
         this.offsetPositionTowardsMouse = offsetPositionTowardsMouse;
         this.statusEffects = statusEffects;
@@ -75,13 +77,14 @@ public class Attack
             two.rateOfFire == 0 ? one.rateOfFire : two.rateOfFire,
             two.minDamage == 0 ? one.minDamage : two.minDamage,
             two.maxDamage == 0 ? one.maxDamage : two.maxDamage,
-            two.ignoreArmor,
+            two.armorIgnored == 0 ? one.armorIgnored : two.armorIgnored,
             two.angleOffset == 0 ? one.angleOffset : two.angleOffset,
             two.angleGap == 0 ? one.angleGap : two.angleGap,
             two.angleChange == 0 ? one.angleChange : two.angleChange,
             two.onMouse,
             two.target == null ? one.target : two.target,
             MultiplierData.Override(one.acceleration, two.acceleration),
+            OrbitData.Override(one.orbit, two.orbit),
             PositionData2d.Override(one.positionOffset, two.positionOffset),
             two.offsetPositionTowardsMouse,
             two.statusEffects == null ? one.statusEffects : two.statusEffects
@@ -151,6 +154,41 @@ public class Attack
                     angleOffset += angleChange;
                 }
             }
+        }
+    }
+
+    [Serializable]
+    public class OrbitData
+    {
+        public float distance;
+        public float speed;
+        public bool waitUntilDistance;
+
+        public OrbitData(float distance, float speed, bool waitUntilDistance)
+        {
+            this.distance = distance;
+            this.speed = speed;
+            this.waitUntilDistance = waitUntilDistance;
+        }
+
+        public static OrbitData Override(OrbitData one, OrbitData two)
+        {
+            return new OrbitData(
+                two.distance == 0 ? one.distance : two.distance,
+                two.speed == 0 ? one.speed : two.speed,
+                two.waitUntilDistance
+            );
+        }
+    }
+
+    [Serializable]
+    public class SeekingData
+    {
+        public string target;
+
+        public SeekingData(string target)
+        {
+            this.target = target;
         }
     }
 }

@@ -9,5 +9,15 @@
 	"maxDamage": 6.0,
 	"angleGap": 10,
 	"target": "self",
-	"angleChange": 5
+	"armorIgnored": 10,
+	"angleChange": 5,
+	"acceleration": {
+		"rate": -0.005,
+		"min": 0.2,
+		"multiplier": 1.0
+	},
+	"orbit": {
+		"distance": 5.0,
+		"speed": 30.0
+	}
 }

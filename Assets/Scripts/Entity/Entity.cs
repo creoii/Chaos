@@ -9,9 +9,9 @@ public class Entity : MonoBehaviour
     public List<StatusEffect> activeEffects = new List<StatusEffect>();
     public bool alive = true;
 
-    public virtual void OnHit(Projectile projectile, float damage, bool ignoreArmor)
+    public virtual void OnHit(Projectile projectile, float damage, int armorIgnored)
     {
-        Damage(damage, false);
+        Damage(damage, armorIgnored);
         if (projectile.attack.statusEffects != null)
         {
             foreach (StatusEffect effect in projectile.attack.statusEffects)
@@ -55,12 +55,12 @@ public class Entity : MonoBehaviour
         else stats.mana += amount;
     }
 
-    public virtual void Damage(float amount, bool ignoreArmor)
+    public virtual void Damage(float amount, int armorIgnored)
     {
-        if (!ignoreArmor)
+        if (armorIgnored > 0)
         {
-            if (amount - stats.armor <= amount * .1f) amount *= .1f;
-            else amount -= stats.armor;
+            if (armorIgnored >= stats.armor) amount += stats.armor;
+            else amount += armorIgnored;
         }
 
         if (stats.health - amount < 0)

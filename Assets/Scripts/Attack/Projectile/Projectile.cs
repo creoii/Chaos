@@ -5,8 +5,8 @@ public class Projectile : MonoBehaviour
     public Entity owner;
     public Attack attack;
     public Vector3 direction;
-    public float speed;
-    public float rate;
+    private float speed;
+    private float rate;
     private float damage;
     private float life;
 
@@ -37,6 +37,15 @@ public class Projectile : MonoBehaviour
             }
         }
 
+        if (attack.orbit != null)
+        {
+            if (attack.orbit.speed != 0f)
+            {
+                if (attack.orbit.distance >= 0 && Vector3.Distance(owner.transform.position, transform.position) >= attack.orbit.distance) speed = 0;
+                transform.RotateAround(owner.transform.position, Vector3.forward, attack.orbit.speed * Time.deltaTime);
+            }
+        }
+
         life += Time.deltaTime;
     }
 
@@ -56,12 +65,12 @@ public class Projectile : MonoBehaviour
     {
         if (collision.gameObject.tag.Equals("Character") && gameObject.tag.Equals("EnemyProjectile"))
         {
-            collision.gameObject.GetComponent<Character>().OnHit(this, damage, attack.ignoreArmor);
+            collision.gameObject.GetComponent<Character>().OnHit(this, damage, attack.armorIgnored);
             gameObject.SetActive(false);
         }
         else if (collision.gameObject.tag.Equals("Enemy") && gameObject.tag.Equals("PlayerProjectile"))
         {
-            collision.gameObject.GetComponent<Enemy>().OnHit(this, damage, attack.ignoreArmor);
+            collision.gameObject.GetComponent<Enemy>().OnHit(this, damage, attack.armorIgnored);
             gameObject.SetActive(false);
         }
     }

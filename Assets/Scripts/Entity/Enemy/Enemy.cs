@@ -65,9 +65,9 @@ public class Enemy : Entity
         }
     }
 
-    public override void OnHit(Projectile projectile, float damage, bool ignoreArmor)
+    public override void OnHit(Projectile projectile, float damage, int armorIgnored)
     {
-        base.OnHit(projectile, damage, ignoreArmor);
+        base.OnHit(projectile, damage, armorIgnored);
         if (projectile.owner is Character character)
         {
             ++character.statistics.hits;
